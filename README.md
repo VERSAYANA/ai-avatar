@@ -1,0 +1,5 @@
+- Next.js
+- TypeScript
+- Tailwindcss
+- ESLint
+- Prettier (with tailwindcss & ESLint plugin)
