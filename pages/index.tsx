@@ -1,5 +1,4 @@
 import Head from 'next/head'
-3
 
 export default function Home() {
   return (
@@ -7,12 +6,12 @@ export default function Home() {
       <Head>
         <title>Home</title>
       </Head>
-      <main className="h-full min-h-screen w-full overflow-x-hidden dark:bg-gray-900">
+      <main className="h-full min-h-screen w-full overflow-x-hidden dark:bg-black">
         <div className="flex h-full min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-6">
-          <h1 className="text-gray-900/95- text-3xl font-bold md:text-6xl">
+          <h1 className="text-3xl font-bold text-gray-900/95 dark:text-gray-50/95 md:text-6xl">
             Turn me into anything you want
           </h1>
-          <p className="mb-6 mt-10 text-xl font-medium text-gray-800/80">
+          <p className="mb-6 mt-10 text-xl font-medium text-gray-800/80 dark:text-gray-100/80">
             Use your creativty to create a prompt or use my prompt generator
             tool for inspiration
           </p>
@@ -25,14 +24,14 @@ export default function Home() {
                 Prompt
               </label> */}
               <div className="flex h-12 w-full rounded-md drop-shadow-sm">
-                <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-4 text-sm text-gray-500">
+                <span className="inline-flex cursor-default items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-4 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
                   versayana,{' '}
                 </span>
                 <input
                   type={'text'}
                   name="prompt"
                   id="prompt"
-                  className="block w-full flex-1 rounded-none rounded-r-md border border-gray-300 focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
+                  className="block w-full flex-1 rounded-none rounded-r-md border border-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 sm:text-sm"
                 />
               </div>
             </div>
@@ -42,13 +41,13 @@ export default function Home() {
                 target={'_blank'}
                 rel="noreferrer"
                 type="button"
-                className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 drop-shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 drop-shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 hover:dark:bg-gray-900"
               >
                 Prompt Generator
               </a>
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md border border-transparent bg-purple-600 py-2 px-4 text-sm font-medium text-white drop-shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                className="inline-flex justify-center rounded-md border border-transparent bg-purple-600 py-2 px-4 text-sm font-medium text-white drop-shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 hover:dark:bg-purple-800 "
               >
                 Generate
               </button>
