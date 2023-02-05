@@ -6,16 +6,19 @@ import Image from 'next/image'
 export default function Home() {
   const [generatedImage, setGeneratedImage] = useState('')
   const [prompt, setPrompt] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
 
   console.log(generatedImage)
 
   const retry = (estimatedTime: number) => {
+    setIsGenerating(true)
     window.setTimeout(() => {
       generate()
-    }, estimatedTime * 1000)
+    }, (estimatedTime + 5) * 1000)
   }
 
   const generate = async () => {
+    setIsGenerating(true)
     console.log('versayana, ' + prompt)
     try {
       const res = await fetch('/api/generate', {
@@ -31,16 +34,19 @@ export default function Home() {
           retry(data.estimated_time + 1)
         }
       } else if (res.ok) {
+        setIsGenerating(false)
         const data = await res.json()
         if (data?.image) {
           setGeneratedImage(data.image)
         }
       } else {
+        setIsGenerating(false)
         const err = await res.json()
         console.error(err)
       }
     } catch (error) {
       console.error(error)
+      setIsGenerating(false)
     }
   }
 
@@ -72,11 +78,11 @@ export default function Home() {
                   id="prompt"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
-                  className="rounded-r-0 block w-full flex-1 rounded-none border border-r-0 border-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 sm:text-sm"
+                  className="z-10 block w-full flex-1 rounded-none border border-gray-300 focus:border-purple-500 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 sm:text-sm"
                 />
                 <button
                   onClick={() => setPrompt('')}
-                  className="inline-flex items-center justify-center rounded-md rounded-l-none border border-gray-300 bg-white py-2 px-3 text-sm font-medium text-gray-700 drop-shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-100 hover:dark:bg-neutral-800 focus:dark:ring-offset-slate-900"
+                  className="inline-flex items-center justify-center rounded-md rounded-l-none border border-l-0 border-gray-300 bg-white py-2 px-3 text-sm font-medium text-gray-700 drop-shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-100 hover:dark:bg-neutral-800 focus:dark:ring-offset-slate-900"
                 >
                   <X size={24} />
                 </button>
@@ -95,9 +101,14 @@ export default function Home() {
               <button
                 onClick={generate}
                 type="button"
+                disabled={isGenerating}
                 className="inline-flex justify-center rounded-md border border-transparent bg-purple-600 py-2 px-4 text-sm font-medium text-white drop-shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-50 dark:bg-purple-700 hover:dark:bg-purple-600 focus:dark:ring-offset-slate-900 "
               >
-                Generate
+                {isGenerating ? (
+                  <span className="loader"></span>
+                ) : (
+                  <span>Generate</span>
+                )}
               </button>
             </div>
             {generatedImage && (
